@@ -19,7 +19,7 @@ import org.bukkit.util.Vector;
 public class TFM_ProtectedArea
 {
     public static final double MAX_RADIUS = 50.0;
-    private static final Map<String, SerializableProtectedRegion> PROTECTED_AREAS = new HashMap<String, SerializableProtectedRegion>();
+    private static Map<String, SerializableProtectedRegion> PROTECTED_AREAS = new HashMap<String, SerializableProtectedRegion>();
 
     private TFM_ProtectedArea()
     {
@@ -261,6 +261,10 @@ public class TFM_ProtectedArea
                 TFM_ProtectedArea.addProtectedArea("spawn_" + world.getName(), world.getSpawnLocation(), TFM_ConfigEntry.AUTO_PROTECT_RADIUS.getDouble());
             }
         }
+    }
+    
+    public static void unload() {
+        TFM_ProtectedArea.PROTECTED_AREAS = null;
     }
 
     public static class SerializableProtectedRegion implements Serializable

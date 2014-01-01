@@ -21,7 +21,7 @@ import org.bukkit.util.FileUtil;
 
 public class TFM_SuperadminList
 {
-    private static final Map<String, TFM_Superadmin> superadminList = new HashMap<String, TFM_Superadmin>();
+    private static Map<String, TFM_Superadmin> superadminList = new HashMap<String, TFM_Superadmin>();
     private static List<String> superadminNames = new ArrayList<String>();
     private static List<String> senioradminNames = new ArrayList<String>();
     private static List<String> telnetadminNames = new ArrayList<String>();
@@ -510,5 +510,14 @@ public class TFM_SuperadminList
         {
             throw new Exception();
         }
+    }
+
+    public static void unload()
+    {
+        TFM_SuperadminList.senioradminNames = null;
+        TFM_SuperadminList.superadminIPs = null;
+        TFM_SuperadminList.superadminList = null;
+        TFM_SuperadminList.superadminNames = null;
+        TFM_SuperadminList.telnetadminNames = null;
     }
 }

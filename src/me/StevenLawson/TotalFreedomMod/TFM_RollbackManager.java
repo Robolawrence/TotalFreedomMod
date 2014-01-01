@@ -15,8 +15,8 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public class TFM_RollbackManager
 {
-    private static final Map<String, List<RollbackEntry>> PLAYER_HISTORY = new HashMap<String, List<RollbackEntry>>();
-    private static final List<String> REMOVE_ROLLBACK_HISTORY = new ArrayList<String>();
+    private static Map<String, List<RollbackEntry>> PLAYER_HISTORY = new HashMap<String, List<RollbackEntry>>();
+    private static List<String> REMOVE_ROLLBACK_HISTORY = new ArrayList<String>();
 
     private TFM_RollbackManager()
     {
@@ -198,6 +198,11 @@ public class TFM_RollbackManager
         {
             return this.action;
         }
+    }
+    
+    public static void unload() {
+        TFM_RollbackManager.PLAYER_HISTORY = null;
+        TFM_RollbackManager.REMOVE_ROLLBACK_HISTORY = null;
     }
 
     public static class RollbackEntry

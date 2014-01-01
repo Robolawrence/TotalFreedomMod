@@ -20,7 +20,7 @@ import org.bukkit.scheduler.BukkitTask;
 
 public class TFM_PlayerData
 {
-    public final static Map<Player, TFM_PlayerData> userinfo = new HashMap<Player, TFM_PlayerData>();
+    public static Map<Player, TFM_PlayerData> userInfo = new HashMap<Player, TFM_PlayerData>();
     private final Player player;
     private final String ip;
     private final String username;
@@ -64,11 +64,11 @@ public class TFM_PlayerData
 
     public static TFM_PlayerData getPlayerData(Player player)
     {
-        TFM_PlayerData playerdata = TFM_PlayerData.userinfo.get(player);
+        TFM_PlayerData playerdata = TFM_PlayerData.userInfo.get(player);
 
         if (playerdata == null)
         {
-            Iterator<Entry<Player, TFM_PlayerData>> it = userinfo.entrySet().iterator();
+            Iterator<Entry<Player, TFM_PlayerData>> it = userInfo.entrySet().iterator();
             while (it.hasNext())
             {
                 Entry<Player, TFM_PlayerData> pair = it.next();
@@ -96,7 +96,7 @@ public class TFM_PlayerData
         if (playerdata == null)
         {
             playerdata = new TFM_PlayerData(player);
-            TFM_PlayerData.userinfo.put(player, playerdata);
+            TFM_PlayerData.userInfo.put(player, playerdata);
         }
 
         return playerdata;
@@ -496,5 +496,9 @@ public class TFM_PlayerData
     public String getTag()
     {
         return this.tag;
+    }
+    
+    public static void unload() {
+        TFM_PlayerData.userInfo = null;
     }
 }

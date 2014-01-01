@@ -19,7 +19,7 @@ import org.bukkit.event.player.PlayerLoginEvent.Result;
 
 public class TFM_ServerInterface
 {
-    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd \'at\' HH:mm:ss z");
+    private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd \'at\' HH:mm:ss z");
 
     public static void setOnlineMode(boolean mode)
     {
@@ -361,5 +361,9 @@ public class TFM_ServerInterface
     public static String getVersion()
     {
         return MinecraftServer.getServer().getVersion();
+    }
+    
+    public static void unload() {
+        TFM_ServerInterface.dateFormat = null;
     }
 }

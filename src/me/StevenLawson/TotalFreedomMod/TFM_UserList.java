@@ -12,7 +12,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
-public class TFM_UserList
+public class TFM_UserList implements TFM_Static
 {
     private static final String USERLIST_FILENAME = "userlist.yml";
     private static TFM_UserList instance = null;
@@ -71,6 +71,11 @@ public class TFM_UserList
         {
             TFM_Log.severe(ex);
         }
+    }
+    
+    @Override
+    public void unload() {
+        TFM_UserList.instance = null;
     }
 
     public static TFM_UserList getInstance(TotalFreedomMod plugin)

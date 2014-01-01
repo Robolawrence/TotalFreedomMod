@@ -9,7 +9,7 @@ import org.bukkit.World;
 
 public class TFM_GameRuleHandler
 {
-    private static final EnumMap<TFM_GameRule, TFM_GameRule_Value> GAME_RULES = new EnumMap<TFM_GameRule, TFM_GameRule_Value>(TFM_GameRule.class);
+    private static EnumMap<TFM_GameRule, TFM_GameRule_Value> GAME_RULES = new EnumMap<TFM_GameRule, TFM_GameRule_Value>(TFM_GameRule.class);
 
     static
     {
@@ -56,6 +56,10 @@ public class TFM_GameRuleHandler
                 }
             }
         }
+    }
+
+    public static void unload() {
+        TFM_GameRuleHandler.GAME_RULES = null;
     }
 
     public enum TFM_GameRule

@@ -10,7 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 
-public class TFM_LogFile
+public class TFM_LogFile implements TFM_Static
 {
     public static final int MAX_LOG_SIZE = 1024 * 1024; // Bytes
     private final Logger logger;
@@ -78,8 +78,14 @@ public class TFM_LogFile
         return TFM_LogFileHolder.INSTANCE;
     }
 
+    @Override
+    public void unload()
+    {
+        TFM_LogFileHolder.INSTANCE = null;
+    }
+
     private static class TFM_LogFileHolder
     {
-        private static final TFM_LogFile INSTANCE = new TFM_LogFile();
+        private static TFM_LogFile INSTANCE = new TFM_LogFile();
     }
 }

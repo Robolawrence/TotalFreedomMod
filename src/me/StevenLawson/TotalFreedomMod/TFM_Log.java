@@ -5,7 +5,7 @@ import java.util.logging.Logger;
 
 public class TFM_Log
 {
-    private static final Logger FALLBACK_LOGGER = Logger.getLogger("Minecraft-Server");
+    private static Logger FALLBACK_LOGGER = Logger.getLogger("Minecraft-Server");
     private static Logger serverLogger = null;
     private static Logger pluginLogger = null;
 
@@ -93,5 +93,12 @@ public class TFM_Log
         {
             return pluginLogger;
         }
+    }
+
+    public static void unload()
+    {
+        TFM_Log.FALLBACK_LOGGER = null;
+        TFM_Log.pluginLogger = null;
+        TFM_Log.serverLogger = null;
     }
 }

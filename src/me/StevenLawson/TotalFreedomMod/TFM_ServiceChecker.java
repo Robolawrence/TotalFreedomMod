@@ -17,7 +17,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
-public class TFM_ServiceChecker
+public class TFM_ServiceChecker implements TFM_Static
 {
     public final Map<String, ServiceStatus> services = new HashMap<String, ServiceStatus>();
     private URL url;
@@ -158,9 +158,15 @@ public class TFM_ServiceChecker
         return TFM_ServiceCheckerHolder.INSTANCE;
     }
 
+    @Override
+    public void unload()
+    {
+        TFM_ServiceCheckerHolder.INSTANCE = null;
+    }
+
     private static class TFM_ServiceCheckerHolder
     {
-        private static final TFM_ServiceChecker INSTANCE = new TFM_ServiceChecker();
+        private static TFM_ServiceChecker INSTANCE = new TFM_ServiceChecker();
     }
 
     public static class ServiceStatus

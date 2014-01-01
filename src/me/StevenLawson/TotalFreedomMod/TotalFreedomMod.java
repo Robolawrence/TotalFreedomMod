@@ -190,8 +190,13 @@ public class TotalFreedomMod extends JavaPlugin
         server.getScheduler().cancelTasks(plugin);
 
         TFM_HTTPD_Manager.getInstance().stop();
+        
+        // This unloads all static (non-String) objects, setting them to null.
+        // Due to the way classloader works, Bukkit plugins which have static members
+        // will never have their members unloaded, essentially creating a memory leak.
+        TFM_Unloader.unload();
 
-        TFM_Log.info("Plugin disabled");
+        this.getLogger().info("Plugin disabled");
     }
 
     @Override
@@ -339,5 +344,15 @@ public class TotalFreedomMod extends JavaPlugin
             TotalFreedomMod.buildNumber = "1";
             TotalFreedomMod.buildDate = TFM_Util.dateToString(new Date());
         }
+    }
+    
+    public static void unload() {
+        TotalFreedomMod.freezePurgeTask = null;
+        TotalFreedomMod.fuckoffEnabledFor = null;
+        TotalFreedomMod.mutePurgeTask = null;
+        TotalFreedomMod.permbannedIps = null;
+        TotalFreedomMod.permbannedPlayers = null;
+        TotalFreedomMod.server = null;
+        TotalFreedomMod.plugin = null;
     }
 }

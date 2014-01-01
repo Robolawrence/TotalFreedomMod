@@ -15,7 +15,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public final class TFM_AdminWorld extends TFM_CustomWorld
+public final class TFM_AdminWorld extends TFM_CustomWorld implements TFM_Static
 {
     private static final long CACHE_CLEAR_FREQUENCY = 30L * 1000L; //30 seconds, milliseconds
     private static final long TP_COOLDOWN_TIME = 500L; //0.5 seconds, milliseconds
@@ -210,6 +210,12 @@ public final class TFM_AdminWorld extends TFM_CustomWorld
         return cached;
     }
 
+    @Override
+    public void unload()
+    {
+        TFM_AdminWorld.TFM_AdminWorldHolder.INSTANCE = null;
+    }
+
     public static enum WeatherMode
     {
         OFF("off"),
@@ -338,6 +344,6 @@ public final class TFM_AdminWorld extends TFM_CustomWorld
 
     private static class TFM_AdminWorldHolder
     {
-        private static final TFM_AdminWorld INSTANCE = new TFM_AdminWorld();
+        private static TFM_AdminWorld INSTANCE = new TFM_AdminWorld();
     }
 }

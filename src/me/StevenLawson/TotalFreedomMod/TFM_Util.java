@@ -41,15 +41,15 @@ import org.bukkit.entity.Projectile;
 
 public class TFM_Util
 {
-    private static final Map<String, Integer> ejectTracker = new HashMap<String, Integer>();
-    public static final Map<String, EntityType> mobtypes = new HashMap<String, EntityType>();
-    public static final List<String> STOP_COMMANDS = Arrays.asList("stop", "off", "end", "halt", "die");
-    public static final List<String> REMOVE_COMMANDS = Arrays.asList("del", "delete", "rem", "remove");
-    public static final List<String> DEVELOPERS = Arrays.asList("Madgeek1450", "DarthSalamon", "AcidicCyanide", "wild1145", "HeXeRei452", "xXWilee999Xx");
-    private static final Random RANDOM = new Random();
+    private static Map<String, Integer> ejectTracker = new HashMap<String, Integer>();
+    public static Map<String, EntityType> mobtypes = new HashMap<String, EntityType>();
+    public static List<String> STOP_COMMANDS = Arrays.asList("stop", "off", "end", "halt", "die");
+    public static List<String> REMOVE_COMMANDS = Arrays.asList("del", "delete", "rem", "remove");
+    public static List<String> DEVELOPERS = Arrays.asList("Madgeek1450", "DarthSalamon", "AcidicCyanide", "wild1145", "HeXeRei452", "xXWilee999Xx");
+    private static Random RANDOM = new Random();
     public static String DATE_STORAGE_FORMAT = "EEE, d MMM yyyy HH:mm:ss Z";
-    public static final Map<String, ChatColor> CHAT_COLOR_NAMES = new HashMap<String, ChatColor>();
-    public static final List<ChatColor> CHAT_COLOR_POOL = Arrays.asList(
+    public static Map<String, ChatColor> CHAT_COLOR_NAMES = new HashMap<String, ChatColor>();
+    public static List<ChatColor> CHAT_COLOR_POOL = Arrays.asList(
             ChatColor.DARK_BLUE,
             ChatColor.DARK_GREEN,
             ChatColor.DARK_AQUA,
@@ -853,5 +853,16 @@ public class TFM_Util
     enum EjectMethod
     {
         STRIKE_ONE, STRIKE_TWO, STRIKE_THREE;
+    }
+    
+    public static void unload() {
+        TFM_Util.CHAT_COLOR_NAMES = null;
+        TFM_Util.CHAT_COLOR_POOL = null;
+        TFM_Util.DATE_STORAGE_FORMAT = null;
+        TFM_Util.DEVELOPERS = null;
+        TFM_Util.RANDOM = null;
+        TFM_Util.REMOVE_COMMANDS = null;
+        TFM_Util.ejectTracker = null;
+        TFM_Util.mobtypes = null;
     }
 }

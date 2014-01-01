@@ -10,10 +10,10 @@ import net.minecraft.util.org.apache.commons.io.FileUtils;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
 
-public class TFM_Config
+public class TFM_Config implements TFM_Static
 {
     public static final String CONFIG_FILENAME = "config.yml";
-    public static final File CONFIG_FILE = new File(TotalFreedomMod.plugin.getDataFolder(), CONFIG_FILENAME);
+    public static File CONFIG_FILE = new File(TotalFreedomMod.plugin.getDataFolder(), CONFIG_FILENAME);
     //
     private final EnumMap<TFM_ConfigEntry, Object> configEntryMap = new EnumMap<TFM_ConfigEntry, Object>(TFM_ConfigEntry.class);
 
@@ -254,6 +254,13 @@ public class TFM_Config
         return TotalFreedomMod.plugin.getResource(CONFIG_FILENAME);
     }
 
+    @Override
+    public void unload()
+    {
+        TFM_Config.CONFIG_FILE = null;
+        TFM_ConfigHolder.INSTANCE = null;
+    }
+
     private static class TFM_Config_DefaultsLoader
     {
         private YamlConfiguration defaults = null;
@@ -288,6 +295,6 @@ public class TFM_Config
 
     private static class TFM_ConfigHolder
     {
-        private static final TFM_Config INSTANCE = new TFM_Config();
+        private static TFM_Config INSTANCE = new TFM_Config();
     }
 }

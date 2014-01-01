@@ -11,7 +11,7 @@ import org.bukkit.WorldType;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 
-public class TFM_Flatlands extends TFM_CustomWorld
+public class TFM_Flatlands extends TFM_CustomWorld implements TFM_Static
 {
     private static final String GENERATION_PARAMETERS = TFM_ConfigEntry.FLATLANDS_GENERATION_PARAMS.getString();
     private static final String WORLD_NAME = "flatlands";
@@ -90,8 +90,14 @@ public class TFM_Flatlands extends TFM_CustomWorld
         return TFM_FlatlandsHolder.INSTANCE;
     }
 
+    @Override
+    public void unload()
+    {
+        TFM_FlatlandsHolder.INSTANCE = null;
+    }
+
     private static class TFM_FlatlandsHolder
     {
-        private static final TFM_Flatlands INSTANCE = new TFM_Flatlands();
+        private static TFM_Flatlands INSTANCE = new TFM_Flatlands();
     }
 }

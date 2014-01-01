@@ -8,9 +8,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.util.Vector;
 
-public class TFM_Jumppads
+public class TFM_Jumppads implements TFM_Static
 {
-    public static final Material BLOCK_ID = Material.WOOL;
+    public static Material BLOCK_ID = Material.WOOL;
     public static final double DAMPING_COEFFICIENT = 0.8;
     public final Map<Player, Boolean> canPushMap = new HashMap<Player, Boolean>();
     private JumpPadMode mode = JumpPadMode.OFF;
@@ -106,6 +106,13 @@ public class TFM_Jumppads
         this.strength = strength;
     }
 
+    @Override
+    public void unload()
+    {
+        TFM_Jumppads.BLOCK_ID = null;
+        TFM_JumpadsHolder.INSTANCE = null;
+    }
+
     public static enum JumpPadMode
     {
         OFF(false), NORMAL(true), NORMAL_AND_SIDEWAYS(true), MADGEEK(true);
@@ -129,6 +136,6 @@ public class TFM_Jumppads
 
     private static class TFM_JumpadsHolder
     {
-        private static final TFM_Jumppads INSTANCE = new TFM_Jumppads();
+        private static TFM_Jumppads INSTANCE = new TFM_Jumppads();
     }
 }

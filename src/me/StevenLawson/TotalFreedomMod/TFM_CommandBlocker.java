@@ -12,7 +12,7 @@ import org.bukkit.command.CommandMap;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class TFM_CommandBlocker
+public class TFM_CommandBlocker implements TFM_Static
 {
     private Map<String, CommandBlockerEntry> blockedCommands = new HashMap<String, CommandBlockerEntry>();
 
@@ -152,6 +152,12 @@ public class TFM_CommandBlocker
         }
 
         return false;
+    }
+
+    @Override
+    public void unload()
+    {
+        TFM_CommandBlockerHolder.INSTANCE = null;
     }
 
     private static enum CommandBlockerRank
@@ -327,6 +333,6 @@ public class TFM_CommandBlocker
 
     private static class TFM_CommandBlockerHolder
     {
-        private static final TFM_CommandBlocker INSTANCE = new TFM_CommandBlocker();
+        private static TFM_CommandBlocker INSTANCE = new TFM_CommandBlocker();
     }
 }
